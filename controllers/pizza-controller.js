@@ -56,7 +56,10 @@ const pizzaController = {
   // { new: true } returns the updated document
   //the "where" clause is used first, then the updated data,
   updatePizza({ params, body }, res) {
-    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    Pizza.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true, // reunning the validation as it only runs during creation and not during update
+    })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
           res.status(404).json({ message: 'No pizza found with this id!' });

@@ -12,9 +12,14 @@ const PizzaSchema = new Schema(
   {
     pizzaName: {
       type: String,
+      required: true, // Added validation
+      // required: 'You need to provide a pizza name!', : he user will receive your custom message instead of the generic "required" message:
+      trim: true,
     },
     createdBy: {
       type: String,
+      required: true,
+      trim: true,
     },
     createdAt: {
       type: Date,
@@ -24,6 +29,7 @@ const PizzaSchema = new Schema(
     },
     size: {
       type: String,
+      enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
       default: 'Large',
     },
     toppings: [],
